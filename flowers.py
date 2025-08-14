@@ -2,6 +2,10 @@ from bloom import BloomFilter
 from fnv_1a import *
 import math
 import re
+from colorama import Fore, Style, init
+
+# Initialize colorama
+init()
 
 class Flower(BloomFilter):
     def __init__(self, string: str):
@@ -57,7 +61,9 @@ def most_flower(a: Flower | BloomFilter, sentences: list[str]) -> tuple[str, flo
         words = re.sub(r"[^\w']+", " ", sentence).strip().lower().split()
         score = flower_power(a, words, divide=False)
         if score > best_score:
-            print(f"New best sentence: {sentence} with score {score}")
+            print(f"{Fore.CYAN}New best sentence found!{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}→ {sentence}")
+            print(f"{Fore.YELLOW}Score: {score:.3f}{Style.RESET_ALL}")
             best_score = score
             best_sentence = sentence
     return best_sentence, best_score
