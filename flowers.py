@@ -10,7 +10,7 @@ class Flower(BloomFilter):
             string (str): the path to the file you want to open
         """
         super().__init__(2 ** 22, fnv_1a_32, fnv_1a_64, k = 12)
-        self.adds(open(string, "rb"))    
+        self.adds(*[i.strip() for i in open(string, "r").readlines()])    
 
 def flower_power(a: Flower | BloomFilter, b: list[str]) -> float:
     """Compares a bloom filter against a list of words using logarithmic confidence scaling
