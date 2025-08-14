@@ -22,6 +22,9 @@ print("=" * 50)
 
 def analyze_text(text_file: str, bloom_filter: flowers.Flower, language: str) -> None:
     """Analyze how much a text matches a given language's bloom filter"""
+    print(f"\n{Fore.YELLOW}Analyzing {text_file.split('/')[-1]}{Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{'-' * 40}{Style.RESET_ALL}")
+    
     try:
         # Try UTF-8 first
         with open(text_file, "r", encoding='utf-8') as f:
@@ -83,8 +86,11 @@ for text_file in texts:
     })
     
     # Print detailed analysis
+    print(f"\n{Fore.CYAN}{'=' * 20} FRENCH ANALYSIS {'=' * 20}{Style.RESET_ALL}")
     analyze_text(text_file, fr, "French")
+    print(f"\n{Fore.CYAN}{'=' * 20} ENGLISH ANALYSIS {'=' * 20}{Style.RESET_ALL}")
     analyze_text(text_file, eng, "English")
+    print(f"{Fore.CYAN}{'=' * 60}{Style.RESET_ALL}")
 
 # Print final overview
 print(f"\n{Fore.CYAN}Final Analysis Overview{Style.RESET_ALL}")

@@ -3,7 +3,7 @@ from fnv_1a import *
 import math
 import re
 from colorama import Fore, Style, init
-
+def clamp(n, smallest, largest): return max(smallest, min(n, largest))
 # Initialize colorama
 init()
 
@@ -27,7 +27,7 @@ def _flower_power_perword(a: Flower | BloomFilter, b: str) -> float:
     Returns:
         float: Average exponential confidence score (0-1) where 1.0 is exponentially more valuable than 0.5
     """
-    return a.confidence(b) ** 3
+    return clamp(a.confidence(b) ** 3, 0, 1)
 
 def flower_power(a: Flower | BloomFilter, words: list[str], divide = True) -> float:
     """Calculates the flower power of a list of words
