@@ -5,15 +5,25 @@ class BloomFilter:
     filter: bitarray
     k: int
     size: int
+    hashF: function
+    hashF2: function
     
-    def __init__(self, size: int, hashF, hashF2, k):
+    def __init__(self, size: int, hashF: function, hashF2: function, estimated_n: int | None = None, k: int | None = None):
         """initalizes a empty bloom filter
+
+        Args:
+            size (int): How large the bloom filter is, in bits
+            hashF (function): A hash function. Has to be distinct from `hashF2`.
+            hashF2 (function): A hash function. Has to be distinct from `hashF`.
+            estimated_n (int | None, optional): An estimate for N, the number of elements expected in the bloom filter - used to calculate the optimal K.
+            k (int | None, optional): The amount of hash functions to use for each string, using h1 + i * h2. If both `k` and `estimated_n` are unset defaults to `log2(size)`.
         """
         self.filter = bitarray("0" * size)
         self.hashF = hashF
         self.hashF2 = hashF2
         self.size = size
-        self.k = k
+        if(k == None):
+            k = 
     def ingest(self, file: io.BytesIO) -> None:
         self.filter.clear()
         self.filter.fromfile(file)
