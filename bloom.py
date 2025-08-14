@@ -69,7 +69,8 @@ class BloomFilter:
             if (self.filter[(h1 + i * h2) % self.size] == 1):
                 c += 1
         return c / self.k
-    
+   
+ 
 if __name__ == "__main__":
     bloom = BloomFilter(100000, fnv_1a_64, fnv_1a_32, k=8)
     bloom.adds("mustard", "ketchup", "skibidi")
