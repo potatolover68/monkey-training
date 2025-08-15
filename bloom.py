@@ -1,22 +1,30 @@
-from bitarray import bitarray
-from fnv_1a import *
 import io
-from math import log, e, floor
+from math import log
 from typing import Callable
+
+from bitarray import bitarray
+from fnv_1a import fnv_1a_32, fnv_1a_64
 
 
 class BloomFilter:
+    """A probabilistic data structure for fast membership testing.
+
+    Uses multiple hash functions to store items in a bit array, allowing for
+    fast membership queries with some probability of false positives but no
+    false negatives.
+    """
+
     filter: bitarray
     k: int
     size: int
-    hashF: Callable
-    hashF2: Callable
+    hash_f: Callable
+    hash_f2: Callable
 
     def __init__(
         self,
         size: int,
-        hashF: Callable[[str], int],
-        hashF2: Callable[[str], int],
+        hash_f: Callable[[str], int],
+        hash_f2: Callable[[str], int],
         estimated_n: int | None = None,
         k: int | None = None,
     ):
@@ -24,22 +32,28 @@ class BloomFilter:
 
         Args:
             size (int): How large the bloom filter is, in bits
-            hashF (Callable[[str], int]): A hash function. Has to be distinct from `hashF2`.
-            hashF2 (Callable[[str], int]): A hash function. Has to be distinct from `hashF`.
-            estimated_n (int | None, optional): An estimate for N, the number of elements expected in the bloom filter - used to calculate the optimal K.
-            k (int | None, optional): The amount of hash functions to use for each string, using h1 + i * h2. If both `k` and `estimated_n` are unset defaults to `log2(size)`.
+            hash_f (Callable[[str], int]): A hash function. Has to be distinct
+                from `hash_f2`.
+            hash_f2 (Callable[[str], int]): A hash function. Has to be distinct
+                from `hash_f`.
+            estimated_n (int | None, optional): An estimate for N, the number
+                of
+                elements expected in the bloom filter - used to calculate the
+                optimal K.
+            k (int | None, optional): The amount of hash functions to use for
+                each string, using h1 + i * h2. If both `k` and `estimated_n`
+                are unset defaults to `log2(size)`.
         """
         self.filter = bitarray("0" * size)
-        self.hashF = hashF
-        self.hashF2 = hashF2
+        self.hash_f = hash_f
+        self.hash_f2 = hash_f2
         self.size = size
-        if k != None:
+        if k is not None:
             self.k = k
-        elif k == None and estimated_n != None:
-            self.k = size / estimated_n * 0.6931471805
+        elif k is None and estimated_n is not None:
+            self.k = int(size / estimated_n * 0.6931471805)
         else:
-            self.k = log(size, 2)
-        self.k = floor(self.k)
+            self.k = int(log(size, 2))
 
     def ingest(self, file: io.BytesIO) -> None:
         self.filter.clear()
@@ -49,19 +63,19 @@ class BloomFilter:
         self.filter.tofile(file)
 
     def add(self, string: str) -> None:
-        h1 = self.hashF(string)
-        h2 = self.hashF2(string)
+        h1 = self.hash_f(string)
+        h2 = self.hash_f2(string)
         for i in range(self.k):
             self.filter[(h1 + i * h2) % self.size] = 1
-            # print(self.hashF(string * i) % self.size)
+            # print(self.hash_f(string * i) % self.size)
 
     def adds(self, *args) -> None:
         for i in args:
             self.add(i)
 
     def check(self, string: str) -> bool:
-        h1 = self.hashF(string)
-        h2 = self.hashF2(string)
+        h1 = self.hash_f(string)
+        h2 = self.hash_f2(string)
         for i in range(self.k):
             if self.filter[(h1 + i * h2) % self.size] != 1:
                 return False
@@ -76,8 +90,8 @@ class BloomFilter:
         Returns:
             float: 0-1, number of correct hashes/K
         """
-        h1 = self.hashF(string)
-        h2 = self.hashF2(string)
+        h1 = self.hash_f(string)
+        h2 = self.hash_f2(string)
         c = 0
         for i in range(self.k):
             if self.filter[(h1 + i * h2) % self.size] == 1:

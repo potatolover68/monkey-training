@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "analysis_date": "2025-08-14T18:46:22.770733",
+    "source_file": "data/tf2_spy_voicelines.txt",
+    "total_voicelines": 364
+  },
+  "basic_statistics": {
+    "total_words": 1998,
+    "unique_words": 678,
+    "vocabulary_richness": 0.3393,
+    "avg_words_per_line": 5.49
+  },
+  "language_analysis": {
+    "french_words_count": 0,
+    "english_words_count": 535,
+    "ambiguous_words_count": 96,
+    "french_word_percentage": 0.0,
+    "english_word_percentage": 78.91
+  },
+  "bloom_filter_scores": {
+    "french_score": 7.009,
+    "english_score": 25.0,
+    "french_english_ratio": 0.28,
+    "language_bias": "English",
+    "confidence_level": 0.72
+  },
+  "expression_analysis": {
+    "french_expressions_count": 6,
+    "english_expressions_count": 5,
+    "exclamatory_percentage": 69.2,
+    "question_percentage": 10.7,
+    "french_phrases": [
+      "mon dieu",
+      "sacrebleu",
+      "merde",
+      "fantastique",
+      "bon",
+      "amigo"
+    ]
+  },
+  "linguistic_features": {
+    "latin_like_words": 27,
+    "most_common_words": [
+      "you",
+      "the",
+      "to",
+      "we",
+      "is",
+      "of",
+      "this",
+      "have",
+      "my",
+      "are"
+    ],
+    "most_french_sentence": "we should go easy on them they are playing with a handicap they do not have me on their team",
+    "most_english_sentence": "if there are any unicorns prettier than me i will find them i will follow them and no one will ever see those unicorns again"
+  }
+}
