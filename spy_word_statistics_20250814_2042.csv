@@ -1,0 +1,7 @@
+Category,Count,Percentage,Description
+Total Unique Words,623,100.0%,Total vocabulary analyzed
+Words Favoring French,2,0.3%,Words with >0.1 French bias
+Words Favoring English,535,85.9%,Words with <-0.1 English bias
+Neutral Words,86,13.8%,Words with -0.1 to 0.1 bias
+Average French Confidence,0.211,,Mean raw confidence across all words
+Average English Confidence,0.981,,Mean raw confidence across all words

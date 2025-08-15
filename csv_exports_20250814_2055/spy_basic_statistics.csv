@@ -1,0 +1,19 @@
+Metric,Value,Category
+Total Words,1998,Basic
+Unique Words,678,Basic
+Vocabulary Richness,0.3393,Basic
+Avg Words Per Line,5.49,Basic
+French Words Count,0,Language
+English Words Count,535,Language
+Ambiguous Words Count,96,Language
+French Word Percentage,0.00%,Language
+English Word Percentage,78.91%,Language
+French Score,7.009,Bloom Filter
+English Score,25.0,Bloom Filter
+French/English Ratio,0.28,Bloom Filter
+Language Bias,English,Bloom Filter
+Confidence Level,0.72,Bloom Filter
+French Expressions Count,6,Expression
+English Expressions Count,5,Expression
+Exclamatory Percentage,69.2%,Expression
+Question Percentage,10.7%,Expression

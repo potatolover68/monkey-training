@@ -303,3 +303,104 @@ TF2 SPY LINGUISTIC ANALYSIS - PRESENTATION SUMMARY
             output += f"  • {word} ({count} times)\n"
 
         return output
+
+    def get_detailed_word_analysis(self, voicelines_file: str) -> Dict[str, Any]:
+        """Get comprehensive word-by-word analysis using new flowers.py functions"""
+
+        # Read and process text
+        try:
+            with open(voicelines_file, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+        except UnicodeDecodeError:
+            with open(voicelines_file, "r", encoding="latin-1") as f:
+                lines = f.readlines()
+
+        # Clean and extract words
+        all_words = []
+        for line in lines:
+            clean_line = re.sub(r"[^\w\s]", " ", line.lower())
+            words = clean_line.split()
+            all_words.extend(words)
+
+        # Filter out very short words and duplicates while preserving order
+        meaningful_words = []
+        seen = set()
+        for word in all_words:
+            if len(word) > 2 and word not in seen:
+                meaningful_words.append(word)
+                seen.add(word)
+
+        # Get detailed analysis for French and English
+        french_analysis = flowers.analyze_word_scores(
+            self.french_filter, meaningful_words
+        )
+        english_analysis = flowers.analyze_word_scores(
+            self.english_filter, meaningful_words
+        )
+
+        # Combine analysis data
+        combined_word_data = {}
+        for word in meaningful_words:
+            combined_word_data[word] = {
+                "french_raw": french_analysis[word]["raw_confidence"],
+                "french_flower": french_analysis[word]["flower_power"],
+                "french_matches": french_analysis[word]["matches"],
+                "english_raw": english_analysis[word]["raw_confidence"],
+                "english_flower": english_analysis[word]["flower_power"],
+                "english_matches": english_analysis[word]["matches"],
+                "french_bias": french_analysis[word]["raw_confidence"]
+                - english_analysis[word]["raw_confidence"],
+                "frequency": all_words.count(word),  # How often this word appears
+            }
+
+        # Sort by various criteria
+        most_french_raw = sorted(
+            combined_word_data.items(), key=lambda x: x[1]["french_raw"], reverse=True
+        )[:10]
+        most_english_raw = sorted(
+            combined_word_data.items(), key=lambda x: x[1]["english_raw"], reverse=True
+        )[:10]
+        strongest_french_bias = sorted(
+            combined_word_data.items(), key=lambda x: x[1]["french_bias"], reverse=True
+        )[:10]
+        strongest_english_bias = sorted(
+            combined_word_data.items(), key=lambda x: x[1]["french_bias"]
+        )[:10]
+        most_frequent = sorted(
+            combined_word_data.items(), key=lambda x: x[1]["frequency"], reverse=True
+        )[:10]
+
+        # Calculate summary statistics
+        total_words_analyzed = len(meaningful_words)
+        avg_french_raw = (
+            sum(data["french_raw"] for data in combined_word_data.values())
+            / total_words_analyzed
+        )
+        avg_english_raw = (
+            sum(data["english_raw"] for data in combined_word_data.values())
+            / total_words_analyzed
+        )
+
+        words_favoring_french = len(
+            [w for w, data in combined_word_data.items() if data["french_bias"] > 0.1]
+        )
+        words_favoring_english = len(
+            [w for w, data in combined_word_data.items() if data["french_bias"] < -0.1]
+        )
+
+        return {
+            "total_unique_words": total_words_analyzed,
+            "avg_french_confidence": avg_french_raw,
+            "avg_english_confidence": avg_english_raw,
+            "words_favoring_french": words_favoring_french,
+            "words_favoring_english": words_favoring_english,
+            "neutral_words": total_words_analyzed
+            - words_favoring_french
+            - words_favoring_english,
+            "most_french_words": most_french_raw,
+            "most_english_words": most_english_raw,
+            "strongest_french_bias": strongest_french_bias,
+            "strongest_english_bias": strongest_english_bias,
+            "most_frequent_words": most_frequent,
+            "all_word_data": combined_word_data,  # Complete dataset
+        }

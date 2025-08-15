@@ -1,0 +1,21 @@
+Word,French Raw,English Raw,Bias Score,Frequency,Analysis Type
+fantastique,1.0,0.583,0.417,1,French Bias
+dieu,1.0,0.833,0.167,2,French Bias
+sir,1.0,1.0,0.0,1,French Bias
+don,1.0,1.0,0.0,8,French Bias
+have,1.0,1.0,0.0,25,French Bias
+surprise,1.0,1.0,0.0,2,French Bias
+one,1.0,1.0,0.0,8,French Bias
+came,1.0,1.0,0.0,1,French Bias
+the,1.0,1.0,0.0,65,French Bias
+about,1.0,1.0,0.0,4,French Bias
+you,0.167,1.0,-0.833,87,Most Frequent
+the,1.0,1.0,0.0,65,Most Frequent
+this,0.083,1.0,-0.917,29,Most Frequent
+have,1.0,1.0,0.0,25,Most Frequent
+are,1.0,1.0,0.0,23,Most Frequent
+that,0.167,1.0,-0.833,21,Most Frequent
+your,0.0,1.0,-1.0,18,Most Frequent
+and,0.083,1.0,-0.917,16,Most Frequent
+cart,0.083,1.0,-0.917,15,Most Frequent
+time,1.0,1.0,0.0,14,Most Frequent

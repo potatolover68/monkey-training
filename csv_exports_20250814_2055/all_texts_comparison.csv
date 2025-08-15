@@ -1,0 +1,5 @@
+Text Name,Short Code,French Score,English Score,French/English Ratio,Vocabulary Richness,Total Words,French Expressions,Exclamatory %,Language Bias
+Jeeves & Wooster,jeeves,10.021,19.000,0.527,0.1049,69773,0,1.9%,English
+Hamlet,hamlet,7.014,15.000,0.468,0.1555,31338,0,7.3%,English
+Romeo & Juliet,romeo,7.037,18.000,0.391,0.1439,24959,0,4.7%,English
+TF2 Spy,spy,7.009,25.000,0.280,0.3393,1998,6,69.2%,English

@@ -33,31 +33,40 @@ def export_spy_analysis_data():
         print(f"  • Analyzing {info['name']}...")
         text_stats = spy_analyzer.analyze_voicelines(text_file)
         text_scores = spy_analyzer.calculate_language_scores(text_file)
+
+        # Add detailed word analysis
+        print("    → Getting detailed word analysis...")
+        word_analysis = spy_analyzer.get_detailed_word_analysis(text_file)
+
         all_analyses[info["short"]] = {
             "name": info["name"],
             "stats": text_stats,
             "scores": text_scores,
+            "word_analysis": word_analysis,
         }
 
     # Get specific Spy data for backwards compatibility
     spy_stats = all_analyses["spy"]["stats"]
     spy_scores = all_analyses["spy"]["scores"]
+    spy_word_analysis = all_analyses["spy"]["word_analysis"]
 
     # Create comparison data
     comparison_data = []
-    for short_name, data in all_analyses.items():
+    for short_name, analysis_data in all_analyses.items():
         comparison_data.append(
             {
-                "name": data["name"],
+                "name": analysis_data["name"],
                 "short": short_name,
-                "french_score": data["scores"]["french_score"],
-                "english_score": data["scores"]["english_score"],
-                "ratio": data["scores"]["french_ratio"],
-                "vocab_richness": data["stats"]["vocabulary_richness"],
-                "total_words": data["stats"]["total_words"],
-                "french_expressions": data["stats"]["total_french_expressions"],
-                "exclamatory_pct": data["stats"]["exclamatory_percentage"],
-                "language_bias": data["scores"]["language_bias"],
+                "french_score": analysis_data["scores"]["french_score"],
+                "english_score": analysis_data["scores"]["english_score"],
+                "ratio": analysis_data["scores"]["french_ratio"],
+                "vocab_richness": analysis_data["stats"]["vocabulary_richness"],
+                "total_words": analysis_data["stats"]["total_words"],
+                "french_expressions": analysis_data["stats"][
+                    "total_french_expressions"
+                ],
+                "exclamatory_pct": analysis_data["stats"]["exclamatory_percentage"],
+                "language_bias": analysis_data["scores"]["language_bias"],
             }
         )
 
@@ -118,6 +127,58 @@ def export_spy_analysis_data():
                 "most_french_sentence": spy_scores["most_french_sentence"],
                 "most_english_sentence": spy_scores["most_english_sentence"],
             },
+            "detailed_word_analysis": {
+                "total_unique_words_analyzed": spy_word_analysis["total_unique_words"],
+                "average_french_confidence": round(
+                    spy_word_analysis["avg_french_confidence"], 3
+                ),
+                "average_english_confidence": round(
+                    spy_word_analysis["avg_english_confidence"], 3
+                ),
+                "words_favoring_french": spy_word_analysis["words_favoring_french"],
+                "words_favoring_english": spy_word_analysis["words_favoring_english"],
+                "neutral_words": spy_word_analysis["neutral_words"],
+                "top_french_words": [
+                    {
+                        "word": word,
+                        "raw_confidence": round(data["french_raw"], 3),
+                        "flower_power": round(data["french_flower"], 3),
+                        "matches": data["french_matches"],
+                        "frequency": data["frequency"],
+                    }
+                    for word, data in spy_word_analysis["most_french_words"]
+                ],
+                "top_english_words": [
+                    {
+                        "word": word,
+                        "raw_confidence": round(data["english_raw"], 3),
+                        "flower_power": round(data["english_flower"], 3),
+                        "matches": data["english_matches"],
+                        "frequency": data["frequency"],
+                    }
+                    for word, data in spy_word_analysis["most_english_words"]
+                ],
+                "strongest_french_bias": [
+                    {
+                        "word": word,
+                        "french_raw": round(data["french_raw"], 3),
+                        "english_raw": round(data["english_raw"], 3),
+                        "bias_score": round(data["french_bias"], 3),
+                        "frequency": data["frequency"],
+                    }
+                    for word, data in spy_word_analysis["strongest_french_bias"]
+                ],
+                "most_frequent_words": [
+                    {
+                        "word": word,
+                        "frequency": data["frequency"],
+                        "french_raw": round(data["french_raw"], 3),
+                        "english_raw": round(data["english_raw"], 3),
+                        "french_bias": round(data["french_bias"], 3),
+                    }
+                    for word, data in spy_word_analysis["most_frequent_words"]
+                ],
+            },
         },
         "comprehensive_comparison": {
             "all_texts_data": comparison_data,
@@ -137,23 +198,25 @@ def export_spy_analysis_data():
         },
         "individual_text_analyses": {
             short: {
-                "name": data["name"],
-                "total_lines": data["stats"]["total_voicelines"],
-                "total_words": data["stats"]["total_words"],
-                "vocabulary_richness": round(data["stats"]["vocabulary_richness"], 4),
-                "french_ratio": round(data["scores"]["french_ratio"], 3),
-                "language_bias": data["scores"]["language_bias"],
-                "french_expressions": data["stats"]["total_french_expressions"],
+                "name": text_data["name"],
+                "total_lines": text_data["stats"]["total_voicelines"],
+                "total_words": text_data["stats"]["total_words"],
+                "vocabulary_richness": round(
+                    text_data["stats"]["vocabulary_richness"], 4
+                ),
+                "french_ratio": round(text_data["scores"]["french_ratio"], 3),
+                "language_bias": text_data["scores"]["language_bias"],
+                "french_expressions": text_data["stats"]["total_french_expressions"],
                 "exclamatory_percentage": round(
-                    data["stats"]["exclamatory_percentage"], 1
+                    text_data["stats"]["exclamatory_percentage"], 1
                 ),
                 "most_french_sentence": (
-                    data["scores"]["most_french_sentence"][:100] + "..."
-                    if len(data["scores"]["most_french_sentence"]) > 100
-                    else data["scores"]["most_french_sentence"]
+                    text_data["scores"]["most_french_sentence"][:100] + "..."
+                    if len(text_data["scores"]["most_french_sentence"]) > 100
+                    else text_data["scores"]["most_french_sentence"]
                 ),
             }
-            for short, data in all_analyses.items()
+            for short, text_data in all_analyses.items()
         },
     }
 
@@ -326,6 +389,116 @@ def export_spy_analysis_data():
 
     print(f"✓ French phrases exported to: {phrases_filename}")
 
+    # Export detailed word analysis to CSV
+    word_analysis_filename = (
+        f'spy_detailed_word_analysis_{datetime.now().strftime("%Y%m%d_%H%M")}.csv'
+    )
+    with open(word_analysis_filename, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(
+            [
+                "Word",
+                "Frequency",
+                "French Raw Confidence",
+                "French Flower Power",
+                "French Matches",
+                "English Raw Confidence",
+                "English Flower Power",
+                "English Matches",
+                "French Bias Score",
+                "Language Preference",
+            ]
+        )
+
+        # Sort by frequency for main export
+        sorted_words = sorted(
+            spy_word_analysis["all_word_data"].items(),
+            key=lambda x: x[1]["frequency"],
+            reverse=True,
+        )
+
+        for word, data in sorted_words:
+            # Determine language preference
+            if data["french_bias"] > 0.1:
+                preference = "French"
+            elif data["french_bias"] < -0.1:
+                preference = "English"
+            else:
+                preference = "Neutral"
+
+            writer.writerow(
+                [
+                    word,
+                    data["frequency"],
+                    f"{data['french_raw']:.3f}",
+                    f"{data['french_flower']:.3f}",
+                    data["french_matches"],
+                    f"{data['english_raw']:.3f}",
+                    f"{data['english_flower']:.3f}",
+                    data["english_matches"],
+                    f"{data['french_bias']:.3f}",
+                    preference,
+                ]
+            )
+
+    print(f"✓ Detailed word analysis exported to: {word_analysis_filename}")
+
+    # Export word analysis summary statistics
+    word_stats_filename = (
+        f'spy_word_statistics_{datetime.now().strftime("%Y%m%d_%H%M")}.csv'
+    )
+    with open(word_stats_filename, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Category", "Count", "Percentage", "Description"])
+
+        total_words = spy_word_analysis["total_unique_words"]
+
+        writer.writerow(
+            ["Total Unique Words", total_words, "100.0%", "Total vocabulary analyzed"]
+        )
+        writer.writerow(
+            [
+                "Words Favoring French",
+                spy_word_analysis["words_favoring_french"],
+                f"{spy_word_analysis['words_favoring_french']/total_words*100:.1f}%",
+                "Words with >0.1 French bias",
+            ]
+        )
+        writer.writerow(
+            [
+                "Words Favoring English",
+                spy_word_analysis["words_favoring_english"],
+                f"{spy_word_analysis['words_favoring_english']/total_words*100:.1f}%",
+                "Words with <-0.1 English bias",
+            ]
+        )
+        writer.writerow(
+            [
+                "Neutral Words",
+                spy_word_analysis["neutral_words"],
+                f"{spy_word_analysis['neutral_words']/total_words*100:.1f}%",
+                "Words with -0.1 to 0.1 bias",
+            ]
+        )
+        writer.writerow(
+            [
+                "Average French Confidence",
+                f"{spy_word_analysis['avg_french_confidence']:.3f}",
+                "",
+                "Mean raw confidence across all words",
+            ]
+        )
+        writer.writerow(
+            [
+                "Average English Confidence",
+                f"{spy_word_analysis['avg_english_confidence']:.3f}",
+                "",
+                "Mean raw confidence across all words",
+            ]
+        )
+
+    print(f"✓ Word analysis statistics exported to: {word_stats_filename}")
+
     return export_data
 
 
@@ -342,6 +515,12 @@ if __name__ == "__main__":
         print("• Comparison CSV: Side-by-side analysis of all texts")
         print("• Spy-focused CSV: Detailed TF2 Spy metrics for spreadsheet analysis")
         print("• French phrases CSV: Detailed French phrase usage by Spy")
+        print(
+            "• Word analysis CSV: Individual word confidence scores and raw bloom filter data"
+        )
+        print(
+            "• Word statistics CSV: Summary statistics of word-level language analysis"
+        )
         print("\nData includes analysis of:")
         print("  - TF2 Spy voicelines")
         print("  - Hamlet (Shakespeare)")

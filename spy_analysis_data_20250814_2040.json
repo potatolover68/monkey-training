@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "analysis_date": "2025-08-14T19:20:09.381193",
+    "analysis_date": "2025-08-14T20:40:04.991538",
     "texts_analyzed": 4,
     "texts_included": [
       "data/tf2_spy_voicelines.txt",
@@ -65,7 +65,7 @@
   "comprehensive_comparison": {
     "all_texts_data": [
       {
-        "name": "Right Ho, Jeeves",
+        "name": "Jeeves & Wooster",
         "short": "jeeves",
         "french_score": 10.020833333333334,
         "english_score": 19.0,
@@ -114,7 +114,7 @@
       }
     ],
     "rankings": {
-      "most_french": "Right Ho, Jeeves",
+      "most_french": "Jeeves & Wooster",
       "least_french": "TF2 Spy",
       "most_dramatic": "TF2 Spy",
       "largest_vocab": "Jeeves & Wooster",
@@ -157,7 +157,7 @@
       "most_french_sentence": "but if you do sir i am for you i serve as good a man as you"
     },
     "jeeves": {
-      "name": "Right Ho, Jeeves",
+      "name": "Jeeves & Wooster",
       "total_lines": 7519,
       "total_words": 69773,
       "vocabulary_richness": 0.1049,

@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "analysis_date": "2025-08-14T20:42:25.653441",
+    "texts_analyzed": 4,
+    "texts_included": [
+      "data/tf2_spy_voicelines.txt",
+      "data/hamlet.txt",
+      "data/romeo.txt",
+      "data/jeeves.txt"
+    ]
+  },
+  "spy_focused_analysis": {
+    "basic_statistics": {
+      "total_words": 1998,
+      "unique_words": 678,
+      "vocabulary_richness": 0.3393,
+      "avg_words_per_line": 5.49
+    },
+    "language_analysis": {
+      "french_words_count": 0,
+      "english_words_count": 535,
+      "ambiguous_words_count": 96,
+      "french_word_percentage": 0.0,
+      "english_word_percentage": 78.91
+    },
+    "bloom_filter_scores": {
+      "french_score": 7.009,
+      "english_score": 25.0,
+      "french_english_ratio": 0.28,
+      "language_bias": "English",
+      "confidence_level": 0.72
+    },
+    "expression_analysis": {
+      "french_expressions_count": 6,
+      "english_expressions_count": 5,
+      "exclamatory_percentage": 69.2,
+      "question_percentage": 10.7,
+      "french_phrases": [
+        "mon dieu",
+        "sacrebleu",
+        "merde",
+        "fantastique",
+        "bon",
+        "amigo"
+      ]
+    },
+    "linguistic_features": {
+      "latin_like_words": 27,
+      "most_common_words": [
+        "you",
+        "the",
+        "to",
+        "we",
+        "is",
+        "of",
+        "this",
+        "have",
+        "my",
+        "are"
+      ],
+      "most_french_sentence": "we should go easy on them they are playing with a handicap they do not have me on their team",
+      "most_english_sentence": "if there are any unicorns prettier than me i will find them i will follow them and no one will ever see those unicorns again"
+    },
+    "detailed_word_analysis": {
+      "total_unique_words_analyzed": 623,
+      "average_french_confidence": 0.211,
+      "average_english_confidence": 0.981,
+      "words_favoring_french": 2,
+      "words_favoring_english": 535,
+      "neutral_words": 86,
+      "top_french_words": [
+        {
+          "word": "sir",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "don",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 8
+        },
+        {
+          "word": "have",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 25
+        },
+        {
+          "word": "surprise",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 2
+        },
+        {
+          "word": "one",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 8
+        },
+        {
+          "word": "came",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "the",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 65
+        },
+        {
+          "word": "about",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 4
+        },
+        {
+          "word": "time",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 14
+        },
+        {
+          "word": "round",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        }
+      ],
+      "top_english_words": [
+        {
+          "word": "kaboom",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 2
+        },
+        {
+          "word": "you",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 87
+        },
+        {
+          "word": "sir",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "indeed",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "drunken",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "wretch",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 2
+        },
+        {
+          "word": "this",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 29
+        },
+        {
+          "word": "scout",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 3
+        },
+        {
+          "word": "rainbows",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 1
+        },
+        {
+          "word": "make",
+          "raw_confidence": 1.0,
+          "flower_power": 1.0,
+          "matches": 12,
+          "frequency": 2
+        }
+      ],
+      "strongest_french_bias": [
+        {
+          "word": "fantastique",
+          "french_raw": 1.0,
+          "english_raw": 0.583,
+          "bias_score": 0.417,
+          "frequency": 1
+        },
+        {
+          "word": "dieu",
+          "french_raw": 1.0,
+          "english_raw": 0.833,
+          "bias_score": 0.167,
+          "frequency": 2
+        },
+        {
+          "word": "sir",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 1
+        },
+        {
+          "word": "don",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 8
+        },
+        {
+          "word": "have",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 25
+        },
+        {
+          "word": "surprise",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 2
+        },
+        {
+          "word": "one",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 8
+        },
+        {
+          "word": "came",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 1
+        },
+        {
+          "word": "the",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 65
+        },
+        {
+          "word": "about",
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "bias_score": 0.0,
+          "frequency": 4
+        }
+      ],
+      "most_frequent_words": [
+        {
+          "word": "you",
+          "frequency": 87,
+          "french_raw": 0.167,
+          "english_raw": 1.0,
+          "french_bias": -0.833
+        },
+        {
+          "word": "the",
+          "frequency": 65,
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "french_bias": 0.0
+        },
+        {
+          "word": "this",
+          "frequency": 29,
+          "french_raw": 0.083,
+          "english_raw": 1.0,
+          "french_bias": -0.917
+        },
+        {
+          "word": "have",
+          "frequency": 25,
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "french_bias": 0.0
+        },
+        {
+          "word": "are",
+          "frequency": 23,
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "french_bias": 0.0
+        },
+        {
+          "word": "that",
+          "frequency": 21,
+          "french_raw": 0.167,
+          "english_raw": 1.0,
+          "french_bias": -0.833
+        },
+        {
+          "word": "your",
+          "frequency": 18,
+          "french_raw": 0.0,
+          "english_raw": 1.0,
+          "french_bias": -1.0
+        },
+        {
+          "word": "and",
+          "frequency": 16,
+          "french_raw": 0.083,
+          "english_raw": 1.0,
+          "french_bias": -0.917
+        },
+        {
+          "word": "cart",
+          "frequency": 15,
+          "french_raw": 0.083,
+          "english_raw": 1.0,
+          "french_bias": -0.917
+        },
+        {
+          "word": "time",
+          "frequency": 14,
+          "french_raw": 1.0,
+          "english_raw": 1.0,
+          "french_bias": 0.0
+        }
+      ]
+    }
+  },
+  "comprehensive_comparison": {
+    "all_texts_data": [
+      {
+        "name": "Jeeves & Wooster",
+        "short": "jeeves",
+        "french_score": 10.020833333333334,
+        "english_score": 19.0,
+        "ratio": 0.5274122807017544,
+        "vocab_richness": 0.10494030642225503,
+        "total_words": 69773,
+        "french_expressions": 0,
+        "exclamatory_pct": 1.9417475728155338,
+        "language_bias": "English"
+      },
+      {
+        "name": "Hamlet",
+        "short": "hamlet",
+        "french_score": 7.013888888888889,
+        "english_score": 15.0,
+        "ratio": 0.4675925925925926,
+        "vocab_richness": 0.15546620716063564,
+        "total_words": 31338,
+        "french_expressions": 0,
+        "exclamatory_pct": 7.306338028169014,
+        "language_bias": "English"
+      },
+      {
+        "name": "Romeo & Juliet",
+        "short": "romeo",
+        "french_score": 7.037037037037037,
+        "english_score": 18.0,
+        "ratio": 0.39094650205761317,
+        "vocab_richness": 0.14387595656877278,
+        "total_words": 24959,
+        "french_expressions": 0,
+        "exclamatory_pct": 4.665216340343243,
+        "language_bias": "English"
+      },
+      {
+        "name": "TF2 Spy",
+        "short": "spy",
+        "french_score": 7.008680555555555,
+        "english_score": 25.0,
+        "ratio": 0.2803472222222222,
+        "vocab_richness": 0.33933933933933935,
+        "total_words": 1998,
+        "french_expressions": 6,
+        "exclamatory_pct": 69.23076923076923,
+        "language_bias": "English"
+      }
+    ],
+    "rankings": {
+      "most_french": "Jeeves & Wooster",
+      "least_french": "TF2 Spy",
+      "most_dramatic": "TF2 Spy",
+      "largest_vocab": "Jeeves & Wooster",
+      "spy_position": 4,
+      "spy_percentile": 25.0
+    }
+  },
+  "individual_text_analyses": {
+    "spy": {
+      "name": "TF2 Spy",
+      "total_lines": 364,
+      "total_words": 1998,
+      "vocabulary_richness": 0.3393,
+      "french_ratio": 0.28,
+      "language_bias": "English",
+      "french_expressions": 6,
+      "exclamatory_percentage": 69.2,
+      "most_french_sentence": "we should go easy on them they are playing with a handicap they do not have me on their team"
+    },
+    "hamlet": {
+      "name": "Hamlet",
+      "total_lines": 4544,
+      "total_words": 31338,
+      "vocabulary_richness": 0.1555,
+      "french_ratio": 0.468,
+      "language_bias": "English",
+      "french_expressions": 0,
+      "exclamatory_percentage": 7.3,
+      "most_french_sentence": "the top of mine an excellent play well digested in the"
+    },
+    "romeo": {
+      "name": "Romeo & Juliet",
+      "total_lines": 4137,
+      "total_words": 24959,
+      "vocabulary_richness": 0.1439,
+      "french_ratio": 0.391,
+      "language_bias": "English",
+      "french_expressions": 0,
+      "exclamatory_percentage": 4.7,
+      "most_french_sentence": "but if you do sir i am for you i serve as good a man as you"
+    },
+    "jeeves": {
+      "name": "Jeeves & Wooster",
+      "total_lines": 7519,
+      "total_words": 69773,
+      "vocabulary_richness": 0.1049,
+      "french_ratio": 0.527,
+      "language_bias": "English",
+      "french_expressions": 0,
+      "exclamatory_percentage": 1.9,
+      "most_french_sentence": "fiche de ce type infect c est idiot de faire comme ça l oiseau"
+    }
+  }
+}

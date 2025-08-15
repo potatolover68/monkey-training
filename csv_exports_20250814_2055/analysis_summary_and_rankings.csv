@@ -1,0 +1,15 @@
+Category,Value,Description
+Analysis Date,2025-08-14T20:42:25.653441,When analysis was performed
+Texts Analyzed,4,Number of texts in comparison
+Most French Text,Jeeves & Wooster,Text with highest French ratio
+Least French Text,TF2 Spy,Text with lowest French ratio
+Most Dramatic Text,TF2 Spy,Text with highest exclamatory %
+Largest Vocabulary,Jeeves & Wooster,Text with most total words
+Spy Position,4,Spy's rank out of 4 texts
+Spy Percentile,25.0th,Spy's percentile ranking for French-ness
+Total Words Analyzed,623,Spy vocabulary size
+Avg French Confidence,0.211,Mean French bloom filter score
+Avg English Confidence,0.981,Mean English bloom filter score
+Words Favoring French,2,Words with French bias > 0.1
+Words Favoring English,535,Words with English bias > 0.1
+Neutral Words,86,Words with bias between -0.1 and 0.1
